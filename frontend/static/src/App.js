@@ -4,11 +4,10 @@ import Cookies from 'js-cookie';
 import CreateProfile from './CreateProfile';
 import Registration from './Registration';
 import Login from './Login';
-// import Button from 'react-bootstrap/Button';
+import ArticleList from './ArticleList';
+
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-// import Form from 'react-bootstrap/Form';
-// import FormControl from 'react-bootstrap/FormControl';
 
 class App extends Component {
   constructor(props) {
@@ -96,7 +95,7 @@ class App extends Component {
       <Nav className="mr-auto">
         <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'articles'})}>Home</button>
         {!!Cookies.get('Authorization') && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'profile'})}>View Profile</button>}
-
+        {!!Cookies.get('Authorization') && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: ''})}>Add New Post</button>}
       </Nav>
         {!!Cookies.get('Authorization')
         ? <button className="btn btn-link text-decoration-none" onClick={this.handleLogout}>LOGOUT</button>
@@ -108,6 +107,7 @@ class App extends Component {
     {this.state.selection === 'login' && <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>}
     {this.state.selection === 'signup' && <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>}
     {this.state.selection === 'profile' && <CreateProfile/>}
+    {this.state.selection === 'articles' && <ArticleList/>}
     </>
   );
   }

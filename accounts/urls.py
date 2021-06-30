@@ -2,7 +2,7 @@ from django.urls import include, path
 
 from . import views
 
-app_nam = 'api_v1'
+app_name = 'api_v1'
 
 urlpatterns = [
     path('profiles/', views.ProfileListAPIView.as_view()),

@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     # local
     'accounts.apps.AccountsConfig',
     'api.apps.ApiConfig',
+    'articles.apps.ArticlesConfig', 
     'frontend.apps.FrontendConfig',
 ]
 
