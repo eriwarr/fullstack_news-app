@@ -4,17 +4,17 @@ import Cookies from 'js-cookie';
 import CreateProfile from './CreateProfile';
 import Registration from './Registration';
 import Login from './Login';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
+// import Form from 'react-bootstrap/Form';
+// import FormControl from 'react-bootstrap/FormControl';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selection: !!Cookies.get('Authorization') ? 'profile' : 'login',
+      selection: 'articles',
       user: '',
     };
     this.handleLogin = this.handleLogin.bind(this);
@@ -94,20 +94,19 @@ class App extends Component {
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="#home">Eric's News App</Navbar.Brand>
       <Nav className="mr-auto">
-        <Nav.Link href="#home">Home</Nav.Link>
-        <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'register'})}>Register</button>
-        <Nav.Link href="#features">Login</Nav.Link>
-        <Nav.Link href="#pricing">View Profile</Nav.Link>
+        <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'articles'})}>Home</button>
+        {!!Cookies.get('Authorization') && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'profile'})}>View Profile</button>}
+
       </Nav>
-      <Form inline>
-        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-        <Button variant="outline-info">Search</Button>
-      </Form>
+        {!!Cookies.get('Authorization')
+        ? <button className="btn btn-link text-decoration-none" onClick={this.handleLogout}>LOGOUT</button>
+        : <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'signup'})}>Sign Up</button>
+        }
    </Navbar>
 
     {this.state.selection === 'profile' && <button type='button' onClick={this.handleLogout}>LOGOUT</button>}
     {this.state.selection === 'login' && <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>}
-    {this.state.selection === 'register' && <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>}
+    {this.state.selection === 'signup' && <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>}
     {this.state.selection === 'profile' && <CreateProfile/>}
     </>
   );
