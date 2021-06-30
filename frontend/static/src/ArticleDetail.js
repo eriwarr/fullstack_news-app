@@ -16,6 +16,8 @@ class ArticleDetail extends Component {
         <h2 className="blog-post-title">{article.title}</h2>
         <p className="blog-post-meta">date</p>
         <p>{article.body}</p>
+        <p className="edit-article">This is your article. Want to edit it? <button className="btn"><i className="icon-edit">Edit</i></button></p>
+        <hr/>
       </div>
       </>
     )

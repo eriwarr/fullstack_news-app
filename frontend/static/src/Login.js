@@ -24,7 +24,6 @@ class Login extends Component {
 
   render() {
     return(
-
       <div className="signup-form">
         <form onSubmit={this.handleSubmit}>
           <h2>Sign In</h2>

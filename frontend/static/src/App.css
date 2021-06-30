@@ -154,5 +154,11 @@ img{
 
 .btn-success {
   background-color: #353A3F;
-  border: #353A3F; 
+  border: #353A3F;
+}
+
+.edit-article{
+  color: blue;
+  font-style: italic;
+  font-size: 15px; 
 }

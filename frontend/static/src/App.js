@@ -5,6 +5,7 @@ import CreateProfile from './CreateProfile';
 import Registration from './Registration';
 import Login from './Login';
 import ArticleList from './ArticleList';
+import NewPost from './NewPost';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -95,7 +96,7 @@ class App extends Component {
       <Nav className="mr-auto">
         <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'articles'})}>Home</button>
         {!!Cookies.get('Authorization') && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'profile'})}>View Profile</button>}
-        {!!Cookies.get('Authorization') && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: ''})}>Add New Post</button>}
+        {!!Cookies.get('Authorization') && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'newpost'})}>Add New Post</button>}
       </Nav>
         {!!Cookies.get('Authorization')
         ? <button className="btn btn-link text-decoration-none" onClick={this.handleLogout}>LOGOUT</button>
@@ -108,6 +109,7 @@ class App extends Component {
     {this.state.selection === 'signup' && <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>}
     {this.state.selection === 'profile' && <CreateProfile/>}
     {this.state.selection === 'articles' && <ArticleList/>}
+    {this.state.selection === 'newpost' && <NewPost handleNavigation={this.handleNavigation}/>}
     </>
   );
   }
