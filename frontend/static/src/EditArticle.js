@@ -2,7 +2,7 @@ import { Component } from 'react';
 import Cookies from 'js-cookie';
 import './App.css';
 
-class NewPost extends Component {
+class EditPost extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -54,4 +54,4 @@ class NewPost extends Component {
     )
   }
 }
-export default NewPost;
+export default EditPost;

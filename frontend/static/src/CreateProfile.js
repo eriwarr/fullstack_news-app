@@ -1,7 +1,6 @@
 import './App.css';
 import { Component } from 'react';
 import Cookies from 'js-cookie';
-import ProfileDetail from './ProfileDetail';
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -72,7 +71,7 @@ class CreateProfile extends Component {
     }
     <button type="submit">CREATE PROFILES!</button>
     </form>
-    <ProfileDetail/>
+
     </>
   );
   }

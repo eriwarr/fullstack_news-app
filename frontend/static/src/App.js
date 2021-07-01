@@ -6,6 +6,8 @@ import Registration from './Registration';
 import Login from './Login';
 import ArticleList from './ArticleList';
 import NewPost from './NewPost';
+import ProfileDetail from './ProfileDetail';
+
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -40,7 +42,7 @@ class App extends Component {
     if(response.ok) {
       const data = await response.json().catch(handleError);
       Cookies.set('Authorization', `Token ${data.key}`);
-      this.setState({selection: 'profile'});
+      this.setState({selection: 'articles'});
     } else {
       // throw error
     }
@@ -103,13 +105,13 @@ class App extends Component {
         : <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'signup'})}>Sign Up</button>
         }
    </Navbar>
-
-    {this.state.selection === 'profile' && <button type='button' onClick={this.handleLogout}>LOGOUT</button>}
     {this.state.selection === 'login' && <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>}
     {this.state.selection === 'signup' && <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>}
-    {this.state.selection === 'profile' && <CreateProfile/>}
+    {this.state.selection === 'profile' && <ProfileDetail/>}
     {this.state.selection === 'articles' && <ArticleList/>}
     {this.state.selection === 'newpost' && <NewPost handleNavigation={this.handleNavigation}/>}
+    {this.state.selection === 'create-profile' && <CreateProfile/>}
+
     </>
   );
   }

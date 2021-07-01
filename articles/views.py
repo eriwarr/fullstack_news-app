@@ -13,10 +13,12 @@ class ArticleListView(generics.ListCreateAPIView):
         serializer.save(author=self.request.user)
 
 class ArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    permission_classes = (IsAuthOrReadOnly,)
 
-    def get_object(self):
-        return get_object_or_404(Article, user=self.request.user)
-
-    def perform_update(self, serializer):
-        instance = serializer.save(author=self.request.user)
+    # def get_object(self):
+    #    return get_object_or_404(Article, user=self.request.user)
+    #
+    # def perform_update(self, serializer):
+    #     instance = serializer.save(author=self.request.user)
