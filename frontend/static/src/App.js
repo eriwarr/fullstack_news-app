@@ -110,7 +110,7 @@ class App extends Component {
     {this.state.selection === 'profile' && <ProfileDetail/>}
     {this.state.selection === 'articles' && <ArticleList/>}
     {this.state.selection === 'newpost' && <NewPost handleNavigation={this.handleNavigation}/>}
-    {this.state.selection === 'create-profile' && <CreateProfile/>}
+    {this.state.selection === 'create-profile' && <CreateProfile handleNavigation={this.handleNavigation}/>}
 
     </>
   );

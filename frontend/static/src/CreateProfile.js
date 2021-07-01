@@ -54,24 +54,28 @@ class CreateProfile extends Component {
       }
       const response = await fetch('api/v1/users/profiles/', options);
       console.log(response);
+      
+      this.props.handleNavigation('profile');
     }
+
 
 
   render() {
+    console.log(this.props.handleNavigation)
   return (
     <>
     <form onSubmit={this.handleSubmit}>
-    <input type="text" name="display_name" value={this.state.display_name} onChange={this.handleInput}/>
-    <input type="file" name="avatar" onChange={this.handleImage}/>
-
-    {this.state.avatar
-      // Allows us to show the data
-      ? <img src={this.state.preview} alt=""/>
-      : null
-    }
-    <button type="submit">CREATE PROFILES!</button>
-    </form>
-
+      <div className="container App-header">
+        <h2>User Profile</h2>
+          <div className="card">
+            <input type="file" name="avatar" onChange={this.handleImage}/>
+            <input className="card-img-top" type="text" name="display_name" value={this.state.display_name} onChange={this.handleInput} placeholder="Enter a Display Name"/>
+            <div className="card-body">
+            <button type="submit" className="btn btn-primary edit-profile">Save your profile!</button>
+          </div>
+        </div>
+    </div>
+  </form>
     </>
   );
   }

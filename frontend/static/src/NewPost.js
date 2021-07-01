@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Cookies from 'js-cookie';
 import './App.css';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 class NewPost extends Component {
   constructor(props){
@@ -40,6 +41,20 @@ class NewPost extends Component {
       <div className="signup-form new-post">
         <form onSubmit={this.addPost}>
           <h2>Create Post</h2>
+            <Dropdown className="form-group">
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Choose a Topic
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">Robotics</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Machine Learning</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Health Care</Dropdown.Item>
+                <Dropdown.Item href="#/action-1">FinTech</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">AgriTech</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Computer Security</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
             <div className="form-group">
               <input className="form-control" name="title" placeholder="What's the name of your blog post?" required="required" onChange={this.handleInput}/>
             </div>
