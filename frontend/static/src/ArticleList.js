@@ -8,9 +8,12 @@ class ArticleList extends Component {
     super(props);
     this.state = {
       articles: [],
+      filter: false,
     }
     this.deleteArticle = this.deleteArticle.bind(this);
     this.updateArticle = this.updateArticle.bind(this);
+    this.filterCategories = this.filterCategories.bind(this);
+    this.showAll = this.showAll.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +43,6 @@ class ArticleList extends Component {
     })
   }
 
-
   updateArticle(article){
     const id = article.id;
 
@@ -64,21 +66,39 @@ class ArticleList extends Component {
       });
   }
 
+
+  filterCategories(event) {
+
+      fetch(`/api/v1/articles/category/?category=${event.target.name}`)
+        .then(response => response.json())
+        .then(data => this.setState({ articles: data }));
+
+    }
+
+    showAll(){
+      fetch('api/v1/articles/')
+      .then(response => response.json())
+      .then(data => this.setState({ articles: data }));
+
+    }
+
+
   render () {
     const articleDisplay = this.state.articles.map((article) => (
       <ArticleDetail key={article.id} article={article} deleteArticle={this.deleteArticle} updateArticle={this.updateArticle}/>
-    ))
+    ));
     return (
       <>
       <div className="container">
         <div className="nav-scroller py-1 mb-2">
           <nav className="nav d-flex justify-content-between">
-            <button className="btn btn-link text-decoration-none nav-btn">Robotics</button>
-            <button className="btn btn-link text-decoration-none nav-btn">Machine Learning</button>
-            <button className="btn btn-link text-decoration-none nav-btn">Health Care</button>
-            <button className="btn btn-link text-decoration-none nav-btn">FinTech</button>
-            <button className="btn btn-link text-decoration-none nav-btn">Agritech</button>
-            <button className="btn btn-link text-decoration-none nav-btn">Computer Security</button>
+            <button className="btn btn-link text-decoration-none nav-btn" onClick={this.filterCategories} name="Robotics">Robotics</button>
+            <button className="btn btn-link text-decoration-none nav-btn" onClick={this.filterCategories} name="Machine Learning">Machine Learning</button>
+            <button className="btn btn-link text-decoration-none nav-btn" onClick={this.filterCategories} name="Health Care">Health Care</button>
+            <button className="btn btn-link text-decoration-none nav-btn" onClick={this.filterCategories} name="FinTech">FinTech</button>
+            <button className="btn btn-link text-decoration-none nav-btn" onClick={this.filterCategories} name="Agritech">Agritech</button>
+            <button className="btn btn-link text-decoration-none nav-btn" onClick={this.filterCategories} name="Computer Security">Computer Security</button>
+            <button className="btn btn-link text-decoration-none nav-btn" onClick={this.showAll} name="Computer Security">ALL</button>
           </nav>
         </div>
         <div className="jumbotron p-3 p-md-5 text-white rounded bg-dark">

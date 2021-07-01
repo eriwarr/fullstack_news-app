@@ -62,7 +62,6 @@ class App extends Component {
     if(response.ok) {
       const data = await response.json().catch(handleError);
       Cookies.set('Authorization', `Token ${data.key}`);
-      this.setState({ selection: 'profile' });
     } else {
       // throw an Error
     }

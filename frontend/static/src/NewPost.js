@@ -9,13 +9,14 @@ class NewPost extends Component {
     this.state = {
       title: '',
       body: '',
+      category: null,
     }
     this.handleInput = this.handleInput.bind(this);
     this.addPost = this.addPost.bind(this);
   }
 
   handleInput(event) {
-    this.setState({ [event.target.name]: event.target.value})
+    this.setState({[event.target.name]: event.target.value})
   }
 
   addPost(event) {
@@ -43,16 +44,19 @@ class NewPost extends Component {
           <h2>Create Post</h2>
             <Dropdown className="form-group">
               <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Choose a Topic
+                {this.state.category
+                  ?  <span>{this.state.category}</span>
+                  :  <span>Choose a Category</span>
+                }
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Robotics</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Machine Learning</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Health Care</Dropdown.Item>
-                <Dropdown.Item href="#/action-1">FinTech</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">AgriTech</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Computer Security</Dropdown.Item>
+                <Dropdown.Item onClick={()=> this.setState({category: "Robotics"})}>Robotics</Dropdown.Item>
+                <Dropdown.Item onClick={()=> this.setState({category: "Machine Learning"})}>Machine Learning</Dropdown.Item>
+                <Dropdown.Item onClick={()=> this.setState({category: "Health Care"})}>Health Care</Dropdown.Item>
+                <Dropdown.Item onClick={()=> this.setState({category: "FinTech"})}>FinTech</Dropdown.Item>
+                <Dropdown.Item onClick={()=> this.setState({category: "AgriTech"})}>AgriTech</Dropdown.Item>
+                <Dropdown.Item onClick={()=> this.setState({category: "Computer Security"})}>Computer Security</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             <div className="form-group">

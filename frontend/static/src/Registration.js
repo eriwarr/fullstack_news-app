@@ -18,10 +18,10 @@ class Registration extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
     this.props.handleRegistration(this.state);
-    this.props.selection('create-profile')
+    this.props.handleNavigation('create-profile')
   }
 
   render() {

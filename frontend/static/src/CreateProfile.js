@@ -39,8 +39,8 @@ class CreateProfile extends Component {
     reader.readAsDataURL(file);
   }
 
-  async handleSubmit(e) {
-      e.preventDefault();
+  async handleSubmit(event) {
+      event.preventDefault();
       let formData = new FormData();
       formData.append('avatar', this.state.avatar);
       formData.append('display_name', this.state.display_name);
@@ -54,7 +54,7 @@ class CreateProfile extends Component {
       }
       const response = await fetch('api/v1/users/profiles/', options);
       console.log(response);
-      
+
       this.props.handleNavigation('profile');
     }
 

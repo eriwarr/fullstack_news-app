@@ -1,7 +1,6 @@
 from rest_framework import generics
 from .models import Article
 from .serializers import ArticleSerializer
-from django.shortcuts import render, get_object_or_404
 from .permissions import IsAuthOrReadOnly
 
 class ArticleListView(generics.ListCreateAPIView):
@@ -12,13 +11,15 @@ class ArticleListView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+
 class ArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     permission_classes = (IsAuthOrReadOnly,)
 
-    # def get_object(self):
-    #    return get_object_or_404(Article, user=self.request.user)
-    #
-    # def perform_update(self, serializer):
-    #     instance = serializer.save(author=self.request.user)
+class ArticleCategoryListView(generics.ListCreateAPIView):
+    serializer_class = ArticleSerializer
+
+    def get_queryset(self):
+        selection = self.request.query_params['category']
+        return Article.objects.filter(category=selection)
