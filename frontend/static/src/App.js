@@ -19,6 +19,7 @@ class App extends Component {
     this.state = {
       selection: 'articles',
       user: '',
+      isStaff: null,
     };
     this.handleLogin = this.handleLogin.bind(this);
     this.handleRegistration = this.handleRegistration.bind(this);
@@ -40,8 +41,10 @@ class App extends Component {
     const handleError = (err) => console.warn(err);
     const response = await fetch('rest-auth/login/', options).catch(handleError);
 
+
     if(response.ok) {
       const data = await response.json().catch(handleError);
+      localStorage.setItem("isStaff", data.user.is_staff);
       Cookies.set('Authorization', `Token ${data.key}`);
       this.setState({selection: 'articles'});
     } else {
@@ -82,6 +85,7 @@ class App extends Component {
     if(response.ok) {
     Cookies.remove('Authorization');
     this.setState({selection: 'login'});
+    localStorage.removeItem("isStaff");
 }
   }
 
@@ -91,6 +95,7 @@ class App extends Component {
 
 
   render() {
+
   return (
     <>
     <Navbar bg="dark" variant="dark">
@@ -99,6 +104,7 @@ class App extends Component {
         <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'articles'})}>Home</button>
         {!!Cookies.get('Authorization') && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'profile'})}>View Profile</button>}
         {!!Cookies.get('Authorization') && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'newpost'})}>Add New Post</button>}
+        {localStorage.getItem("isStaff") && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'submitted-posts'})}>View Submitted Posts</button>}
       </Nav>
         {!!Cookies.get('Authorization')
         ? <button className="btn btn-link text-decoration-none" onClick={this.handleLogout}>LOGOUT</button>
