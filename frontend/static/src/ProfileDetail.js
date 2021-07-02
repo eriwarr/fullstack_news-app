@@ -83,7 +83,7 @@ class ProfileDetail extends Component {
                   ? <button type="submit" className="btn btn-primary edit-profile">Save Profile</button>
                   : <button type="button" key="eric" className="btn btn-primary edit-profile" onClick={()=> this.setState({isEditing: true})}>Edit Profile</button>
                 }
-                <button className="btn btn-primary edit-profile">View Posts</button>
+                <button className="btn btn-primary edit-profile" onClick={()=> this.props.handleNavigation('user-profile-articles')}>View Posts</button>
               </div>
             </div>
           </div>

@@ -8,3 +8,4 @@ class Article(models.Model):
     body = models.TextField()
     created_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
+    published = models.BooleanField(default=False)
