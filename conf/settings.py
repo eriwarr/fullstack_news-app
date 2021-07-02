@@ -28,6 +28,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = True
 
 ALLOWED_HOSTS = [
+'fullstack-news-app-eriwarr.herokuapp.com',
 '127.0.0.1',
 ]
 
@@ -56,7 +57,7 @@ INSTALLED_APPS = [
     # local
     'accounts.apps.AccountsConfig',
     'api.apps.ApiConfig',
-    'articles.apps.ArticlesConfig', 
+    'articles.apps.ArticlesConfig',
     'frontend.apps.FrontendConfig',
 ]
 
@@ -72,6 +73,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -111,17 +113,12 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 #     }
 # }
 
-if os.environ.get('DATABASE_URL'):
-    DATABASES = {
-        'default': dj_database_url.config(default=os.environ['DATABASE_URL'])
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -166,6 +163,13 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False,
+    # Your other settings
+}
 
 # https://docs.djangoproject.com/en/3.2/topics/auth/customizing/#auth-custom-user
 AUTH_USER_MODEL = 'accounts.User'
