@@ -45,7 +45,7 @@ class ProfileDetail extends Component {
     if (this.state.display_name) {
       formData.append('display_name', this.state.display_name);
     }
-    
+
     const options = {
       method: 'PATCH',
       headers: {
@@ -83,7 +83,7 @@ class ProfileDetail extends Component {
                   ? <button type="submit" className="btn btn-primary edit-profile">Save Profile</button>
                   : <button type="button" key="eric" className="btn btn-primary edit-profile" onClick={()=> this.setState({isEditing: true})}>Edit Profile</button>
                 }
-                <button className="btn btn-primary ">View Posts</button>
+                <button className="btn btn-primary edit-profile">View Posts</button>
               </div>
             </div>
           </div>
