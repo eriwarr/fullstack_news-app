@@ -85,7 +85,7 @@ class ArticleList extends Component {
 
   render () {
     const articleDisplay = this.state.articles.map((article) => (
-      <ArticleDetail key={article.id} article={article} deleteArticle={this.deleteArticle} updateArticle={this.updateArticle}/>
+    <ArticleDetail key={article.id} article={article} deleteArticle={this.deleteArticle} updateArticle={this.updateArticle} published={article.published}/>
     ));
     return (
       <>
