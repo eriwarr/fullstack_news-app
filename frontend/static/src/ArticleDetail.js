@@ -22,8 +22,10 @@ class ArticleDetail extends Component {
   }
 
   render() {
+    let isStaff = localStorage.getItem("isStaff")
     const article = this.props.article
     const dateToFormat = article.created_at
+    const published = article.published
     const adminarticle =    [<div className="col-md-8 blog-main">
             <h2 className="blog-post-title">{article.title}</h2>
             <p className="blog-post-meta"><time><Moment format="MM/DD/YYYY">{dateToFormat}</Moment></time><span> by {article.owner}</span></p>
@@ -32,7 +34,11 @@ class ArticleDetail extends Component {
           </div>]
     return(
       <>
-        {article.published && adminarticle}
+      {isStaff
+      ? adminarticle
+      : published && adminarticle
+      }
+
       </>
     )
   }

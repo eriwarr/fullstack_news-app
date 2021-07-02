@@ -8,6 +8,7 @@ import ArticleList from './ArticleList';
 import NewPost from './NewPost';
 import ProfileDetail from './ProfileDetail';
 import UserProfileArticles from './UserProfileArticles';
+import SubmittedArticles from "./SubmittedArticles"; 
 
 
 import Navbar from 'react-bootstrap/Navbar';
@@ -95,7 +96,7 @@ class App extends Component {
 
 
   render() {
-
+    let isStaff = localStorage.getItem("isStaff")
   return (
     <>
     <Navbar bg="dark" variant="dark">
@@ -104,7 +105,7 @@ class App extends Component {
         <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'articles'})}>Home</button>
         {!!Cookies.get('Authorization') && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'profile'})}>View Profile</button>}
         {!!Cookies.get('Authorization') && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'newpost'})}>Add New Post</button>}
-        {localStorage.getItem("isStaff") && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'submitted-posts'})}>View Submitted Posts</button>}
+        {isStaff && <button className="btn btn-link text-decoration-none" onClick={() => this.setState({selection: 'submitted-articles'})}>View Submitted Posts</button>}
       </Nav>
         {!!Cookies.get('Authorization')
         ? <button className="btn btn-link text-decoration-none" onClick={this.handleLogout}>LOGOUT</button>
@@ -118,6 +119,7 @@ class App extends Component {
     {this.state.selection === 'newpost' && <NewPost handleNavigation={this.handleNavigation}/>}
     {this.state.selection === 'create-profile' && <CreateProfile handleNavigation={this.handleNavigation}/>}
     {this.state.selection === 'user-profile-articles' && <UserProfileArticles handleNavigation={this.handleNavigation}/>}
+    {this.state.selection === 'submitted-articles' && <SubmittedArticles handleNavigation={this.handleNavigation}/>}
     </>
   );
   }
